@@ -54,7 +54,7 @@ const deserializeResource = (resource, included, transformFunc) => {
     type,
     ...transformKeys(attributes, transformFunc),
     links,
-    meta,
+    meta: transformKeys(meta, transformFunc),
   };
 
   Object.keys(relationships).forEach(key => {
