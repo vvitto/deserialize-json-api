@@ -47,7 +47,7 @@ const findIncluded = (included, type, id) => {
 const deserializeResource = (resource, included, transformFunc) => {
   if (!resource) return null;
 
-  const { id, type, attributes = {}, relationships = {}, links, meta } = resource;
+  const { id, type, attributes = {}, relationships = {}, links, meta, ...rest } = resource;
 
   const deserialized = {
     id,
@@ -55,6 +55,7 @@ const deserializeResource = (resource, included, transformFunc) => {
     ...transformKeys(attributes, transformFunc),
     links,
     meta: transformKeys(meta, transformFunc),
+    ...transformKeys(rest, transformFunc)
   };
 
   Object.keys(relationships).forEach(key => {
